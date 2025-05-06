@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Prevent iframe embedding (clickjacking protection) -->
-<meta http-equiv="X-Frame-Options" content="DENY" />
-
-<!-- XSS protection -->
-<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-
-<!-- Disable content sniffing -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff" />
-
-<!-- Control referrer policy -->
-<meta name="referrer" content="no-referrer-when-downgrade" />
+  <!-- Security Headers -->
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer-when-downgrade" />
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,20 +22,17 @@
     .hover-scale:hover { transform: scale(1.05); }
     .gallery-img { transition: transform 0.3s ease-in-out; height: auto; }
     .gallery-img img { width: 100%; height: auto; object-fit: cover; border-radius: 0.75rem; }
-     .spinner {
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid white;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      animation: spin 0.8s linear infinite;
     }
-  }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body class="bg-pink-50 text-gray-800 font-sans">
@@ -64,23 +55,22 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="menu" class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 md:hidden flex-col space-y-2 px-4 bg-pink-600 w-full">
+    <div id="menu" class="transition-all duration-300 ease-in-out max-h-0 overflow-hidden md:hidden flex-col space-y-2 px-4 bg-pink-600 w-full">
       <a href="#hero" class="block py-2 px-4 hover:bg-pink-700 rounded-md">Home</a>
       <a href="#services" class="block py-2 px-4 hover:bg-pink-700 rounded-md">Services</a>
       <a href="#gallery" class="block py-2 px-4 hover:bg-pink-700 rounded-md">Gallery</a>
-
       <a href="#booking" class="block py-2 px-4 hover:bg-pink-700 rounded-md">Book</a>
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center bg-pink-100 p-6 fade-in-up">
     <h1 class="text-4xl md:text-6xl font-bold text-pink-700">Phomolo's Nail Studio</h1>
     <p class="mt-4 text-lg md:text-xl text-pink-600">Glam your nails, glow your vibe. <br>Elegance at Your Fingertips.</p>
     <a href="#booking" class="mt-6 px-6 py-3 bg-pink-600 text-white rounded-xl hover:bg-pink-700 transition hover-scale">Book Now</a>
   </section>
 
-  <!-- Services -->
+  <!-- Services Section -->
   <section id="services" class="py-12 px-6 md:px-16 bg-white fade-in-up">
     <h2 class="text-3xl font-bold text-pink-700 mb-8 text-center">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-8">
@@ -102,7 +92,7 @@
     </div>
   </section>
 
-  <!-- Gallery -->
+  <!-- Gallery Section -->
   <section id="gallery" class="py-12 px-6 md:px-16 bg-pink-100 fade-in-up">
     <h2 class="text-3xl font-bold text-pink-700 mb-6 text-center">Gallery</h2>
     <div class="grid md:grid-cols-3 gap-6">
@@ -112,39 +102,26 @@
     </div>
   </section>
 
-  
-  
-
-  <!-- Booking -->
+  <!-- Booking Section -->
   <section id="booking" class="py-12 px-6 md:px-16 bg-pink-50 fade-in-up">
     <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg">
       <h2 class="text-3xl font-bold text-pink-700 mb-6 text-center">Book Now</h2>
       <form action="https://formspree.io/f/xvgaadne" method="POST" class="space-y-4" onsubmit="showLoader(); return false;">
-        <input type="text" name="name" placeholder="Your Name" pattern="^[A-Za-z\s]+$" title="Only letters allowed" required
-          class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
-        
-        <input type="email" name="email" placeholder="Your Email"  required
-          class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
-        
-        <input id="bookingDate" name="date" placeholder="Select a date" required
-          class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
-        
-        <button type="submit"
-          class="w-full bg-pink-600 text-white py-3 rounded-md hover:bg-pink-700 transition flex items-center justify-center">
+        <input type="text" name="name" placeholder="Your Name" pattern="^[A-Za-z\s]+$" required class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
+        <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
+        <input id="bookingDate" name="date" placeholder="Select a date" required class="w-full p-3 border border-pink-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400" />
+        <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-md hover:bg-pink-700 transition flex items-center justify-center">
           Submit Booking
           <span id="loader" class="hidden ml-2 spinner"></span>
         </button>
       </form>
-  
       <div id="thank-you-message" class="hidden text-center text-green-600 mt-4">
         <p>Thank you for your booking! We will get back to you shortly.</p>
       </div>
     </div>
   </section>
-  
-  
 
-  <!-- Instagram -->
+  <!-- Instagram Feed -->
   <section class="py-12 px-6 md:px-16 bg-pink-100 fade-in-up">
     <h2 class="text-3xl font-bold text-pink-700 mb-6 text-center">Instagram Feed</h2>
     <div class="w-full max-w-6xl mx-auto aspect-[4/3]">
@@ -152,30 +129,12 @@
     </div>
   </section>
 
-  <!-- Contact 
-  <section id="contact" class="py-12 px-6 md:px-16 bg-white fade-in-up">
-    <h2 class="text-3xl font-bold text-pink-700 mb-8 text-center">Contact Us</h2>
-    <form action="/contact" method="POST" class="max-w-xl mx-auto space-y-4">
-      <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 border border-pink-300 rounded-md" />
-      <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 border border-pink-300 rounded-md" />
-      <textarea name="message" placeholder="Your Message" rows="4" required class="w-full p-3 border border-pink-300 rounded-md"></textarea>
-      <button type="submit" class="w-full bg-pink-600 text-white py-3 rounded-md hover:bg-pink-700 transition">Send</button>
-    </form>
-  </section>-->
-
   <!-- Footer -->
   <footer class="text-center py-6 bg-pink-50 text-sm text-pink-700">
     &copy; 2025 Phomolo's Nail Studio | @Phenyo dev
     <div class="mt-4">
       <a href="https://instagram.com/yourusername" class="text-pink-700 hover:text-pink-800 mx-2"><i class="fab fa-instagram"></i> Instagram</a>
       <a href="https://facebook.com/yourusername" class="text-pink-700 hover:text-pink-800 mx-2"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://twitter.com/yourusername" class="text-pink-700 hover:text-pink-800 mx-2 inline-flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1200 1227" class="w-5 h-5">
-          <path d="M747 0H943L576 529L1196 1227H829L520 842L170 1227H0L394 723L0 0H379L654 396L747 0ZM686 739L739 814H947L369 102H228L686 739Z"/>
-        </svg>
-        
-      </a>
-      
     </div>
   </footer>
 
@@ -186,92 +145,32 @@
     </svg>
   </a>
 
+  <!-- JavaScript for Mobile Menu Toggle -->
   <script>
-//testimonials 
-document.getElementById("testimonial-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("max-h-0");
+      menu.classList.toggle("py-4");
+    });
 
-    const name = document.getElementById("testi-name").value.trim();
-    const message = document.getElementById("testi-message").value.trim();
+    function showLoader() {
+      const loader = document.getElementById("loader");
+      const thankYouMessage = document.getElementById("thank-you-message");
 
-    if (!name || !message) return;
+      loader.classList.remove("hidden");
+      thankYouMessage.classList.add("hidden");
 
-    const testimonialHTML = `
-      <div class="bg-pink-50 p-4 rounded-md shadow-md">
-        <p class="text-pink-700 font-semibold">${name}</p>
-        <p class="text-gray-700 mt-2">${message}</p>
-      </div>
-    `;
+      setTimeout(() => {
+        loader.classList.add("hidden");
+        thankYouMessage.classList.remove("hidden");
+      }, 2000);
+    }
 
-    document.getElementById("testimonial-list").insertAdjacentHTML("afterbegin", testimonialHTML);
-
-    // Clear the form
-    document.getElementById("testimonial-form").reset();
-  });
-
-     function showLoader() {
-    const loader = document.getElementById("loader");
-    const thankYouMessage = document.getElementById("thank-you-message");
-    
-    // Show loader and hide form
-    loader.classList.remove("hidden");
-    thankYouMessage.classList.add("hidden");
-
-    // Simulate form submission (You can remove this if using actual form submission)
-    setTimeout(function () {
-      // After submission, hide loader and show thank you message
-      loader.classList.add("hidden");
-      thankYouMessage.classList.remove("hidden");
-    }, 3000); // Simulated delay of 3 seconds
-  }
-  flatpickr("#bookingDate", {
-  enableTime: true,
-  dateFormat: "Y-m-d H:i",
-  position: "above" // 👈 This is what makes it show above
-});
-
-
-    document.getElementById("booking").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const loader = document.getElementById("loader");
-  const thankYouMessage = document.getElementById("thank-you-message");
-  const form = document.getElementById("booking");
-
-  loader.classList.remove("hidden");
-
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    thankYouMessage.classList.remove("hidden");
-    setTimeout(() => {
-      thankYouMessage.classList.remove("opacity-0");
-    }, 50);
-
-    // Reset the form fields
-    form.reset();
-  }, 2000);
-});
-
-  
-    const menuToggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
-    const hamburgerIcon = menuToggle.querySelector("i"); // Access the <i> inside the button
-  
-    menuToggle.addEventListener("click", function () {
-      if (menu.classList.contains("max-h-0")) {
-        menu.classList.remove("max-h-0");
-        menu.classList.add("max-h-96", "py-4");
-        hamburgerIcon.classList.remove("fa-bars");
-        hamburgerIcon.classList.add("fa-times"); // Change to "X" icon
-      } else {
-        menu.classList.remove("max-h-96", "py-4");
-        menu.classList.add("max-h-0");
-        hamburgerIcon.classList.remove("fa-times");
-        hamburgerIcon.classList.add("fa-bars"); // Change back to hamburger icon
-      }
+    flatpickr("#bookingDate", {
+      altInput: true,
+      altFormat: "F j, Y",
+      dateFormat: "Y-m-d",
     });
   </script>
-  
-
 </body>
 </html>
